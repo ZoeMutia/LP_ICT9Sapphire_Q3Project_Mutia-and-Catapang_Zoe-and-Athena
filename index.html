@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Fare Guide</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script>
+        function calculateFare() {
+            let fares = { "North Ave": 13, "Quezon Ave": 15, "GMA Kamuning": 17, "Cubao": 20, "Santolan": 23, "Ortigas": 25, "Shaw": 28, "Boni": 25, "Guadalupe": 23, "Buendia": 20, "Ayala": 17, "Magallanes": 15, "Taft": 13 };
+            let fromStation = document.getElementById("from").value;
+            let toStation = document.getElementById("to").value;
+            let isDiscounted = document.getElementById("discounted").checked;
+            
+            if (fromStation === toStation) {
+                document.getElementById("ticketPrice").innerHTML = "Php 0.00 (Same Station)";
+                return;
+            }
+
+            let fare = Math.abs(fares[toStation] - fares[fromStation]) + 13;
+            if (isDiscounted) fare *= 0.8;
+            
+            document.getElementById("ticketPrice").innerHTML = `Php ${fare.toFixed(2)}`;
+        }
+    </script>
+    <style>
+        body { background-color: lightpink; font-family: cursive; }
+        .fare-box { background-color: #d1477e; color: white; font-size: 2rem; padding: 20px; text-align: center; border-radius: 10px; }
+        .navbar { background-color: hotpink !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">🚆 Rail Transit</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="page2.html">Train Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="page3.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container my-4">
+        <h1 class="text-center">Fare Guide</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="map.png" alt="Transit Map" class="img-fluid">
+            </div>
+            <div class="col-md-4">
+                <label for="from">Leaving From:</label>
+                <select id="from" class="form-control" onchange="calculateFare()">
+                    <option>North Ave</option>
+                    <option>Quezon Ave</option>
+                    <option>GMA Kamuning</option>
+                    <option>Cubao</option>
+                    <option>Santolan</option>
+                    <option>Ortigas</option>
+                    <option>Shaw</option>
+                    <option>Boni</option>
+                    <option>Guadalupe</option>
+                    <option>Buendia</option>
+                    <option>Ayala</option>
+                    <option>Magallanes</option>
+                    <option>Taft</option>
+                </select>
+                <label for="to">Going To:</label>
+                <select id="to" class="form-control" onchange="calculateFare()">
+                    <option>North Ave</option>
+                    <option>Quezon Ave</option>
+                    <option>GMA Kamuning</option>
+                    <option>Cubao</option>
+                    <option>Santolan</option>
+                    <option>Ortigas</option>
+                    <option>Shaw</option>
+                    <option>Boni</option>
+                    <option>Guadalupe</option>
+                    <option>Buendia</option>
+                    <option>Ayala</option>
+                    <option>Magallanes</option>
+                    <option>Taft</option>
+                </select>
+                <div class="form-check my-2">
+                    <input type="checkbox" class="form-check-input" id="discounted" onchange="calculateFare()">
+                    <label class="form-check-label" for="discounted">Discounted Fare</label>
+                </div>
+                <button class="btn btn-info mt-2" onclick="calculateFare()">Calculate Fare</button>
+            </div>
+            <div class="col-md-4">
+                <div class="fare-box" id="ticketPrice">Php 28.00</div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white text-center py-3">
+        <p>Sources: <a href="https://www.metrolinemap.com/metro/manila/" class="text-warning">Metro Line Map</a></p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
